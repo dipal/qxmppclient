@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     model = new QStringListModel();
     ui->list->setModel(model);
+    ui->ChatTab->clear();
 }
 
 MainWindow::~MainWindow()
@@ -146,4 +147,24 @@ void MainWindow::handleNonrosterPresence(const Presence &presence)
 
 void MainWindow::handleRosterError(const IQ &iq)
 {
+}
+
+void MainWindow::on_list_doubleClicked(const QModelIndex &index)
+{
+    QString friendId = ui->list->model()->data(index).toString();
+    auto it = chatMap.find(friendId);
+    ChatArea *chatArea;
+    if (it==chatMap.end())
+    {
+        chatArea = new ChatArea();
+        //tabIndex[friendId] =
+        ui->ChatTab->addTab(chatArea, friendId);
+        ui->ChatTab->setCurrentWidget(chatArea);
+    }
+    else
+    {
+        chatArea = it.value();
+        ui->ChatTab->setCurrentWidget(chatArea);
+    }
+    qDebug()<<friendId;
 }

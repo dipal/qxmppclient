@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QThread>
 #include <QStringListModel>
+#include <chatarea.h>
 #include <gloox/client.h>
 #include <gloox/connectionlistener.h>
 #include <gloox/connectiontls.h>
@@ -67,6 +68,8 @@ public:
 private slots:
     void on_loginButton_clicked();
 
+    void on_list_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
 
@@ -90,6 +93,8 @@ private:
     RecvThread *recvThread;
     VCardManager *vcardManager;
     QStringListModel *model;
+    QMap<QString, ChatArea*> chatMap;
+    QMap<QString, int> tabIndex;
 
     // ConnectionListener interface
 

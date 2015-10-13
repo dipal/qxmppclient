@@ -22,6 +22,7 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     chatarea.ui
 
+QMAKE_CXXFLAGS += -std=c++11
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../gloox/lib/release/ -lgloox
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../gloox/lib/debug/ -lgloox
